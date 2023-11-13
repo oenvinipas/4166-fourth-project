@@ -4,7 +4,10 @@ const morgan = require("morgan");
 const methodOverride = require("method-override");
 const mainRoutes = require("./routes/mainNavigation");
 const eventRoutes = require("./routes/eventRoutes");
+const userRoutes = require("./routes/userRoutes");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
 //create app
 const app = express();
@@ -33,10 +36,22 @@ mongoose
   })
   .catch((err) => console.error(err));
 
+app.use(
+  session({
+    secret: "fkasfjui1unfjek;rj0newoafna",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 60 * 60 * 1000 },
+    store: new MongoStore({ mongoUrl: url })
+  })
+);
+
 //setup routes
 app.use("/", mainRoutes);
 
 app.use('/events', eventRoutes);
+
+app.use('/users', userRoutes);
 
 //none of the routes were executed
 app.use((req, res, next) => {

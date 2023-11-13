@@ -56,13 +56,19 @@ exports.getEventById = (req, res, next) => {
   model.findById(id)
     .lean()
     .then(event => {
-      event.startDate = DateTime.fromJSDate(event.startDate).toLocaleString(
-        DateTime.DATETIME_MED
-      );
-      event.endDate = DateTime.fromJSDate(event.endDate).toLocaleString(
-        DateTime.DATETIME_MED
-      );
-      res.render("./events/event", { event });
+      if (event) {
+        event.startDate = DateTime.fromJSDate(event.startDate).toLocaleString(
+          DateTime.DATETIME_MED
+        );
+        event.endDate = DateTime.fromJSDate(event.endDate).toLocaleString(
+          DateTime.DATETIME_MED
+          );
+        res.render("./events/event", { event });
+      } else {
+        let err = new Error("Invalid event id");
+        err.status = 404;
+        return next(err);
+      }
     })
     .catch(err => {
       next(err)
