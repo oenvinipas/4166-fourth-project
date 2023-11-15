@@ -15,7 +15,8 @@
         <div class="info-header">
           <div class="info-header-h3">
             <h3 class="info-header-children"><%= event.title %></h3>
-            <h4 class="info-header-children">Host: <%= event.host %></h4>
+            <% console.log() %>
+            <h4 class="info-header-children">Host: <%= event.host.firstName %> <%= event.host.lastName%></h4>
             <small class="date-location info-header-children"
               >Date: <%= event.startDate %> - <%= event.endDate %></small
             >

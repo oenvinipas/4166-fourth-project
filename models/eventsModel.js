@@ -12,8 +12,8 @@ const eventSchema = new Schema({
     required: [true, "title is required"]
   },
   host: {
-    type: String,
-    required: [true, "host is required"],
+    type: Schema.Types.ObjectId,
+    ref: "User"
   },
   startDate: {
     type: Date,

@@ -8,6 +8,7 @@ const userRoutes = require("./routes/userRoutes");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const flash = require('connect-flash')
 
 //create app
 const app = express();
@@ -45,6 +46,15 @@ app.use(
     store: new MongoStore({ mongoUrl: url })
   })
 );
+
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  res.locals.errorMessages = req.flash('error');
+  res.locals.successMessages = req.flash('success');
+  next();
+});
 
 //setup routes
 app.use("/", mainRoutes);

@@ -62,7 +62,7 @@
   width: 80vw;
   margin: 0 auto;
   padding: 1.5rem 0;
-  color: white;
+  color: var(--quartz-white);
   font-weight: 700;
   font-size: 2rem;
 }
@@ -88,7 +88,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: white;
+  color: var(--quartz-white);
   box-shadow: 5px 10px 10px rgb(0 0 0 / 0.2);
   transition: 0.3s all ease-in-out;
 }
@@ -112,13 +112,13 @@
 }
 
 .event a {
-  color: white;
+  color: var(--quartz-white);
 }
 
 .event-anchor {
-  color: white;
+  color: var(--quartz-white);
   text-decoration: none;
-  border: 1.5px solid white;
+  border: 1.5px solid var(--quartz-white);
   border-radius: 5px;
   padding: 0.5rem 1.5rem;
   transition: 0.2s all ease-in-out;

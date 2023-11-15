@@ -24,6 +24,7 @@ exports.newEvent = (req, res) => {
 
 exports.postEvent = (req, res, next) => {
   let event = new model(req.body);
+  event.host = req.session.user;
 
   let image = "/images/";
   if (!req.file) {
@@ -55,6 +56,7 @@ exports.getEventById = (req, res, next) => {
 
   model.findById(id)
     .lean()
+    .populate("host", "firstName lastName")
     .then(event => {
       if (event) {
         event.startDate = DateTime.fromJSDate(event.startDate).toLocaleString(
