@@ -12,6 +12,7 @@ main h1 {
 
 .category {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 

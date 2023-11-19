@@ -42,8 +42,8 @@ app.use(
     secret: "fkasfjui1unfjek;rj0newoafna",
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60 * 60 * 1000 },
-    store: new MongoStore({ mongoUrl: url })
+    store: new MongoStore({ mongoUrl: url }),
+    cookie: { maxAge: 60 * 60 * 1000 }
   })
 );
 

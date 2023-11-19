@@ -57,8 +57,7 @@ exports.processLogin = (req, res, next) => {
 
 exports.getProfilePage = (req, res, next) => {
     let id = req.session.user;
-    //have a feeling the Event.find() part is wrong...
-    //it was wrong
+    
     Promise.all([User.findById(id), Event.find({ host: id })])
         .then(result => {
             const [user, events] = result;

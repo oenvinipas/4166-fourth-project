@@ -4,7 +4,7 @@
 <%- include('./../partials/endHeader.ejs') %>
 
 <main>
-    <% if (categoryEvents.length > 0) { %>
+    <% if (categoryEvents.length) { %>
         <section class="category">
             <% categoryEvents.forEach(event => { %>
                 <h2><%= event.title %></h2>
