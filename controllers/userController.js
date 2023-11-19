@@ -7,7 +7,6 @@ exports.getNewPage = (req, res) => {
 
 exports.createUser = (req, res, next) => {
     let user = new User(req.body)
-    console.log(user)
     user.save()
         .then(user => res.redirect('/users/login'))
         .catch(err => {

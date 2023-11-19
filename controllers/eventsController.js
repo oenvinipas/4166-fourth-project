@@ -39,7 +39,9 @@ exports.postEvent = (req, res, next) => {
     })
     .catch(err => {
       if (err.name === "ValidationError") {
-        err.status = 400;
+        // err.status = 400;
+        req.flash("error", "Validation error");
+        res.redirect('back')
       }
       next(err)
     })
