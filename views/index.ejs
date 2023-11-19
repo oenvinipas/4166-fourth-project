@@ -21,7 +21,8 @@
       <% if (events.length < 1) { %>
         <p id="no-events">No Events Posted at the Moment...</p>
       <% } else { %>
-          <% for (let i = 0; i < 4; i++) { %>
+          <% let i = 0 %>
+          <% while (i < 4 && events[i] !== undefined) { %>
             <div class="event">
               <h3><%= events[i].title %></h3>
               <p>
@@ -29,6 +30,7 @@
               </p>
               <a href="/events/<%= events[i]._id %>" class="event-anchor">More Info</a>
             </div>
+            <% i++ %>
           <% } %>
       <% } %>
     </div>

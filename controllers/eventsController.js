@@ -48,12 +48,6 @@ exports.postEvent = (req, res, next) => {
 exports.getEventById = (req, res, next) => {
   let id = req.params.id;
 
-  if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-    let err = new Error("Invalid event id from here");
-    err.status = 400;
-    return next(err);
-  }
-
   model.findById(id)
     .lean()
     .populate("host", "firstName lastName")
@@ -80,12 +74,6 @@ exports.getEventById = (req, res, next) => {
 exports.editEvent = (req, res, next) => {
   let id = req.params.id;
 
-  if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-    let err = new Error("Invalid event id");
-    err.status = 400;
-    return next(err);
-  }
-
   model.findById(id)
     .lean()
     .then(event => {
@@ -97,10 +85,6 @@ exports.editEvent = (req, res, next) => {
           includeOffset: false,
         });
         res.render("./events/edit", { event });
-      } else {
-        let err = new Error("Cannot find a event with id " + id);
-        err.status = 404;
-        next(err);
       }
     })
     .catch(err => {
@@ -126,20 +110,10 @@ exports.updateEvent = (req, res, next) => {
       });
   }
 
-  if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-    let err = new Error("Invalid event id");
-    err.status = 400;
-    return next(err);
-  }
-
   model.findByIdAndUpdate(id, event, {useFindAndModify: false, runValidators: true})
     .then(event => {
       if (event) {
         res.redirect("/events/" + id);
-      } else {
-        let err = new Error("Cannot find a event with id " + id);
-        err.status = 404;
-        next(err);
       }
     })
     .catch(err => {
@@ -152,21 +126,11 @@ exports.updateEvent = (req, res, next) => {
 
 exports.deleteEvent = (req, res, next) => {
   let id = req.params.id;
-
-  if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-    let err = new Error("Invalid event id");
-    err.status = 400;
-    return next(err);
-  }
   
   model.findByIdAndDelete(id, {useFindAndModify: false})
     .then(event => {
       if (event) {
         res.redirect("/events");
-      } else {
-        let err = new Error("Cannot find a event with id " + id);
-        err.status = 404;
-        next(err);
       }
     })
     .catch(err => {

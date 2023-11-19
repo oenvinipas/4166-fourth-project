@@ -29,24 +29,28 @@
               >Location: <%= event.location %></small
             >
           </div>
-          <div class="info-header-options">
-            <form>
-              <button
-                type="submit"
-                formmethod="GET"
-                formaction="/events/<%= event._id %>/edit"
-              >
-                <i class="fa-solid fa-pen-to-square green-icon"></i>
-              </button>
-              <button
-                type="submit"
-                formmethod="POST"
-                formaction="/events/<%= event._id %>?_method=DELETE"
-              >
-                <i class="fa-solid fa-trash-can red-icon"></i>
-              </button>
-            </form>
-          </div>
+          <% console.log(event) %>
+          <% console.log(user) %>
+          <% if (user == event.host._id) { %>
+            <div class="info-header-options">
+              <form>
+                <button
+                  type="submit"
+                  formmethod="GET"
+                  formaction="/events/<%= event._id %>/edit"
+                >
+                  <i class="fa-solid fa-pen-to-square green-icon"></i>
+                </button>
+                <button
+                  type="submit"
+                  formmethod="POST"
+                  formaction="/events/<%= event._id %>?_method=DELETE"
+                >
+                  <i class="fa-solid fa-trash-can red-icon"></i>
+                </button>
+              </form>
+            </div>
+          <% } %>
         </div>
         <div class="info-description">
           <p><%= event.details %></p>
